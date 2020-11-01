@@ -18,7 +18,7 @@ public class EventRepositoryTest {
     EventRepository eventRepository;
 
     @Test
-    void sizeOfEventsIncreasesBy1() {
+    void smokeTest() {
         List<Event> events = eventRepository.findAll();
 
         eventRepository.save(new Event());

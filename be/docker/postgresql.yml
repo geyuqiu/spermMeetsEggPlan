@@ -1,0 +1,10 @@
+version: '2'
+services:
+  acht-postgresql:
+    image: postgres:11.3
+    environment:
+      - POSTGRES_PASSWORD=Def12345
+      - POSTGRES_USER=spermMeetsEggPlan
+      - POSTGRES_DB=spermMeetsEggPlan
+    ports:
+      - 5432:5432

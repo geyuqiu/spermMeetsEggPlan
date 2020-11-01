@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.0-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from sperm.meets.egg.plan.be.repository -->
 	</parent>
 	<groupId>sperm.meets.egg.plan</groupId>
 	<artifactId>be</artifactId>

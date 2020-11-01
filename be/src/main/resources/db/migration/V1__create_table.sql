@@ -1,4 +1,6 @@
 --
+CREATE SEQUENCE hibernate_sequence START WITH 1000 INCREMENT BY 1;
+
 CREATE TABLE IF NOT EXISTS user
 (
     id        int NOT NULL PRIMARY KEY,
@@ -14,7 +16,7 @@ CREATE TABLE IF NOT EXISTS event
 (
     id        int NOT NULL PRIMARY KEY,
     name      varchar(20),
-    timestamp timestamp
+    time_stamp timestamp
 );
 
-INSERT INTO event (id, name, timestamp) VALUES (1, 'ovulation', '2020-01-11 14:10:25');
+INSERT INTO event (id, name, time_stamp) VALUES (1, 'ovulation', '2020-01-11 14:10:25');

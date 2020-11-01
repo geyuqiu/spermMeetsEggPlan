@@ -31,6 +31,25 @@ jobs:
         run: mvn package
         working-directory: ${{env.be-working-directory}}
 
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        working-directory: ${{env.be-working-directory}}
+
 #      - name: Install node.js packages
 #        run: npm install
 #        working-directory: ${{env.fe-working-directory}}
@@ -59,24 +78,7 @@ jobs:
 #          # pass GitHub token to allow accurately detecting a build vs a re-run build
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Cache SonarCloud packages
-          uses: actions/cache@v1
-          with:
-            path: ~/.sonar/cache
-            key: ${{ runner.os }}-sonar
-            restore-keys: ${{ runner.os }}-sonar
-        - name: Cache Maven packages
-          uses: actions/cache@v1
-          with:
-            path: ~/.m2
-            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-            restore-keys: ${{ runner.os }}-m2
-        - name: Build and analyze
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-          working-directory: ${{env.be-working-directory}}
+
 
 #      - name: Build and publish docker image
 #        if: github.event_name == 'push' && (github.ref == 'refs/heads/working' || startsWith(github.ref, 'refs/tags/'))

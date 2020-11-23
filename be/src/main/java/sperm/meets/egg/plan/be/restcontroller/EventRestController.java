@@ -15,6 +15,10 @@ public class EventRestController {
 
     @RequestMapping("/")
     String home() {
-        return "Hello World!";
+        return noProblem();
+    }
+
+    String noProblem() {
+        return "";
     }
 }
